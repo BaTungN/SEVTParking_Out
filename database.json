@@ -1,0 +1,20 @@
+{
+  "parking_status": [
+    {
+      "total_slots": 200,
+      "occupied_slots": 1,
+      "name_parking": "A"
+    }
+  ],
+  "vehicles": [
+    {
+      "id_card": "3416214B8896520005155466",
+      "name": "Nguyen Ba Tung",
+      "registration_date": "2025-01-01T00:00:00",
+      "car_parked": true,
+      "license_plate": "20H1-1234",
+      "name_parking": "A",
+      "GenID": "24518387"
+    }
+  ]
+}

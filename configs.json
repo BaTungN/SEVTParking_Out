@@ -1,0 +1,9 @@
+{
+    "server":{
+        "uri":"mongodb://sevtadm:Sevt%21202%23@117.7.228.184:35002/?authSource=admin",
+        "db_name": "CarParkingSystem"
+    },
+    "port":"/dev/ttyUSB0",
+    "baudrate":57600,
+    "name_parking":"1"
+}
