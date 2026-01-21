@@ -20,10 +20,10 @@ gpio_on=False
 #     GPIO.cleanup()
 
 # atexit.register(cleanup_gpio)
-
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)  # PHẢI GỌI DÒNG NÀY TRƯỚC
 GPIO.setwarnings(False)
-GPIO.cleanup()
+
 for pin in gpio_pins:
     GPIO.setup(pin, GPIO.OUT)
 def on_pin():
