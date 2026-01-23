@@ -179,12 +179,28 @@ class ControlCar:
             #     }
             # )
             try:
+                # pipeline = [
+                #     {
+                #         "$match": {
+                #             "name_parking": self.NameParking,
+                #             "checkin_time": {"$ne": None},
+                #             "checkout_time": None,
+                #             "status_in": "valid"
+                #         }
+                #     },
+                #     {"$sort": {"checkin_time": -1}},
+                #     {
+                #         "$group": {
+                #             "_id": "$id_card.sha",
+                #             "latest_log": {"$first": "$$ROOT"}
+                #         }
+                #     },
+                #     {"$count": "total"}
+                # ]
                 pipeline = [
                     {
                         "$match": {
                             "name_parking": self.NameParking,
-                            "checkin_time": {"$ne": None},
-                            "checkout_time": None,
                             "status_in": "valid"
                         }
                     },
@@ -193,6 +209,12 @@ class ControlCar:
                         "$group": {
                             "_id": "$id_card.sha",
                             "latest_log": {"$first": "$$ROOT"}
+                        }
+                    },
+                    {
+                        "$match": {
+                            "latest_log.checkin_time": {"$ne": None},
+                            "latest_log.checkout_time": None
                         }
                     },
                     {"$count": "total"}
@@ -250,13 +272,29 @@ class ControlCar:
                         "checkin_status": state
                     }}, upsert=True)
             try:
+                # pipeline = [
+                #     {
+                #         "$match": {
+                #             "name_parking": self.NameParking,
+                #             "checkin_time": {"$ne": None},
+                #             "checkout_time": None,
+                #             "status_in":"valid"
+                #         }
+                #     },
+                #     {"$sort": {"checkin_time": -1}},
+                #     {
+                #         "$group": {
+                #             "_id": "$id_card.sha",
+                #             "latest_log": {"$first": "$$ROOT"}
+                #         }
+                #     },
+                #     {"$count": "total"}
+                # ]
                 pipeline = [
                     {
                         "$match": {
                             "name_parking": self.NameParking,
-                            "checkin_time": {"$ne": None},
-                            "checkout_time": None,
-                            "status_in":"valid"
+                            "status_in": "valid"
                         }
                     },
                     {"$sort": {"checkin_time": -1}},
@@ -264,6 +302,12 @@ class ControlCar:
                         "$group": {
                             "_id": "$id_card.sha",
                             "latest_log": {"$first": "$$ROOT"}
+                        }
+                    },
+                    {
+                        "$match": {
+                            "latest_log.checkin_time": {"$ne": None},
+                            "latest_log.checkout_time": None
                         }
                     },
                     {"$count": "total"}
