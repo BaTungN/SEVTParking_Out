@@ -43,5 +43,5 @@ source myenv/bin/activate
 ```
 ## Các thư viện
 ```
-pip install cryptography pycryptodome pymongo python-dateutil pyserial
+pip install cryptography pycryptodome pymongo python-dateutil pyserial schedule
 ```
