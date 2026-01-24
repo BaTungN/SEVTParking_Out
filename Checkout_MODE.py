@@ -4,6 +4,7 @@ import logging
 from datetime import datetime, timedelta,timezone
 from datetime import timezone, timedelta, timedelta as td
 import serial
+import schedule
 import time
 from ExtensionCls.MongoDB import MongoDB
 from ExtensionCls.IsCheckTime import IsCheckTime
@@ -111,9 +112,10 @@ class ControlCar:
             print("connected")
 
         except Exception as e:
-            self.open_barrier()
+            #self.open_barrier()
             
             logging.error("KHONG THE KET NOI VOI SERVER: {}".format(e))
+            raise
     def open_barrier(self):
         on_pin()
         # self.ImportLog=ImportLogs(nameparking)
@@ -224,6 +226,7 @@ class ControlCar:
                 logging.info("========****count: {} ****========".format(count))
             except Exception as e:
                 print(" {}".format(e))
+                
             self.parking_status.update_one(
                 {"name_parking": self.NameParking},
                 {"$set": {"occupied_slots": count}}
@@ -342,15 +345,16 @@ class ControlCar:
                     id_car_check=_id_car_check
                     
         except:
-            self.open_barrier()
+            #self.open_barrier()
             logging.error("KHONG THE KET NOI SERVER!")
+            raise
         try:
             if vehicle is None:
                 vehicle = self.vehicles.find_one({"id_card.sha": hash_sha256(id_car_check), "name_parking": self.NameParking})
         except Exception as e:
-            self.open_barrier()
+            #self.open_barrier()
             logging.error("KHONG THE KET NOI SERVER!{}".format(e))
-
+            raise
         if not vehicle:
             _insert_checkout=self.insert_checkout(id_card=id_car_check, checkout_time=datetimee)
             if _insert_checkout:
